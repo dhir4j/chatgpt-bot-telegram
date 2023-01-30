@@ -16,7 +16,7 @@ $`git clone https://github.com/dhir4j/chatgpt-bot-telegram.git`
 2. Install the required packages: 
 $`pip install -r requirements.txt`
 
-3. Replace the [OpenAI API key]() and [Telegram Bot Token]() in the code with your own.
+3. Replace the [OpenAI API key](https://beta.openai.com/account/api-keys) and [Telegram Bot Token](https://telegram.me/BotFather) in the code with your own.
 
 4. Run the program: 
 $`python main.py`
