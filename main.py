@@ -1,5 +1,3 @@
-import requests
-import json
 import telebot
 import openai
 
@@ -23,8 +21,8 @@ def generate_reply(message):
             max_tokens=2048
         )
         bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=response["choices"][0]["text"])
-    except Exception as e:
-        bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text="Use this command in a group and reply to a message.")
+    except Exception:
+        bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text="Use this command as a reply to a message.")
 
 @bot.message_handler(commands=['gpt'])
 def generate_gpt(message):
