@@ -20,7 +20,10 @@ def generate_reply(message):
             prompt=prompt,
             max_tokens=2048
         )
-        bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=response["choices"][0]["text"])
+        if len(response["choices"][0]["text"]) > 3900:
+            bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text="Message is too big, Telegram doesn't support")
+        else:
+            bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=response["choices"][0]["text"])
     except Exception:
         bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text="Use this command as a reply to a message.")
 
@@ -38,11 +41,17 @@ def generate_gpt(message):
         return
     prompt = message.text.split()[1:] # get the text after the command '/gpt'
     prompt = ' '.join(prompt)
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=prompt,
-        max_tokens=2048
-    )
-    bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=response["choices"][0]["text"])
+    try:
+        response = openai.Completion.create(
+            engine="text-davinci-003",
+            prompt=prompt,
+            max_tokens=2048
+        )
+        response_text = response["choices"][0]["text"]
+        if len(response_text) > 3900:
+            raise Exception("Message is too big, Telegram doesn't support messages with more than 3900 characters.")
+        bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=response_text)
+    except Exception as e:
+        bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=str(e))
 
 bot.polling()
