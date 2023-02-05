@@ -32,9 +32,10 @@ def generate_reply(message):
             else:
                 bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=response["choices"][0]["text"])
         print(f'\n\n=======================================================================================\n{message.from_user.username} : {prompt} \n\nChatGPT : {response["choices"][0]["text"]}')
-    except Exception:
+    except Exception as e:
         try:
             bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text="Reply to a message.")
+            print(e)
         except Exception as e:
             print(e)
 
@@ -64,9 +65,10 @@ def generate_roastreply(message):
             else:
                 bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=response["choices"][0]["text"])
             print(f'\n\n=======================================================================================\n{message.from_user.username} : {prompt} \n\nChatGPT : {response["choices"][0]["text"]}')
-    except Exception:
+    except Exception as e:
         try:
             bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text="Reply to a message.")
+            print(e)
         except Exception as e:
             print(e)
 
@@ -81,10 +83,11 @@ def generate_gpt(message):
         # message was sent in private chat, respond to the sender
             chat_id = message.from_user.id
         prompt_array = message.text.split()[1:]
-        if len(prompt_array) < 2:
+        prompt_array[:0] = [' ']
+        if len(prompt_array) < 1:
             bot.send_message(chat_id=chat_id, reply_to_message_id=message.message_id, text="Please provide a message after the command '/gpt'")
             return
-        prompt = message.text.split()[1:] # get the text after the command '/gpt'
+        prompt = prompt_array # get the text after the command '/gpt'
         prompt = ' '.join(prompt)
         response = openai.Completion.create(
             engine="text-davinci-003",
@@ -101,7 +104,6 @@ def generate_gpt(message):
             bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=str(e))
         except Exception as e:
             print(e)
-
 
 @bot.message_handler(commands=['tl'])
 def generate_trengpt(message):
@@ -136,7 +138,8 @@ def generate_trengpt(message):
         print(f'\n\n=======================================================================================\n{message.from_user.username} : {prompt} \n\nChatGPT : {response["choices"][0]["text"]}')
     except Exception as e:
         try:
-            bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=str(e))
+            bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text="Reply to a message.")
+            print(e)
         except Exception as e:
             print(e)
 
@@ -176,7 +179,8 @@ def generate_gptaudio(message):
         print(f'\n\n=======================================================================================\n{message.from_user.username} : {prompt} \n\nChatGPT : {response["choices"][0]["text"]}')
     except Exception as e:
         try:
-            bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=str(e))
+            bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text="Reply to a message.")
+            print(e)
         except Exception as e:
             print(e)
 
@@ -195,7 +199,8 @@ def tts_handler(message):
         os.remove("tts_@dhir4j.mp3")
     except Exception as e:
         try:
-            bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=str(e))
+            bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text="Reply to a message.")
+            print(e)
         except Exception as e:
             print(e)
 
