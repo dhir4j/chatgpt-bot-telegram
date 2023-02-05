@@ -18,7 +18,7 @@ def generate_reply(message):
         reply_to_message = message.reply_to_message
         prompt = reply_to_message.text
         if len(message.text.split()) > 1:
-            prompt = prompt + " " + " ".join(message.text.split()[1:])
+            prompt = prompt + "\n" + " ".join(message.text.split()[1:])
         response = openai.Completion.create(
             engine="text-davinci-003",
             prompt=prompt,
@@ -49,7 +49,7 @@ def generate_roastreply(message):
         reply_to_message = message.reply_to_message
         prompt = reply_to_message.text
         if len(message.text.split()) > 1:
-            prompt = prompt + " " + " ".join(message.text.split()[1:])
+            prompt = prompt + "\n" + " ".join(message.text.split()[1:])
         prompt = "Roast this : " + prompt
         response = openai.Completion.create(
             engine="text-davinci-003",
