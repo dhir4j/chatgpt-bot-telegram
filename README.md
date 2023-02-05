@@ -24,6 +24,9 @@ $`python main.py`
 ## Usage
 1. `/reply` - generates a text response as a reply to a message in a group.
 2. `/gpt` - generates a text response to a message sent in a private chat.
+3. `/gpta` - same like gpt but returns audio
+4. `/roasthim` - Use it to roast, to a reply message
+5. `/tl` - Translate to English
 
 
 ## Dev: [@dhir4j](https://t.me/dhir4j)
