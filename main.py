@@ -1,6 +1,7 @@
 import telebot
 import openai
-
+import os
+from gtts import gTTS
 # initialize OpenAI API client
 openai.api_key = " enter open ai api key here "
 
@@ -164,7 +165,6 @@ def generate_gptaudio(message):
             raise Exception("Message is too big, Telegram doesn't support messages with more than 3900 characters.")
 
         # Convert the text to audio using gTTS library
-        from gtts import gTTS
         tts = gTTS(response_text, lang='en')
         tts.save("dev_@dhir4j.mp3")
 
@@ -179,5 +179,25 @@ def generate_gptaudio(message):
             bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=str(e))
         except Exception as e:
             print(e)
+
+@bot.message_handler(commands=["tts"])
+def tts_handler(message):
+    try:
+        if message.reply_to_message:
+            text = message.reply_to_message.text
+        else:
+            text = message.text.split(" ", maxsplit=1)[1]
+        
+        tts = gTTS(text=text, lang='en')
+        tts.save("tts_@dhir4j.mp3")
+        with open("tts_@dhir4j.mp3", "rb") as f:
+            bot.send_audio(chat_id=message.chat.id, reply_to_message_id=message.message_id, audio=f)
+        os.remove("tts_@dhir4j.mp3")
+    except Exception as e:
+        try:
+            bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=str(e))
+        except Exception as e:
+            print(e)
+
 
 bot.polling()
