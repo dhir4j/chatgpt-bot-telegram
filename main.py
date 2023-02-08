@@ -240,13 +240,7 @@ def generate_dan(message):
 @bot.message_handler(commands=['help'])
 def generate_help(message):
     try:
-        if message.chat.type != "private":
-        # message was sent in a group, respond to the group
-            chat_id = message.chat.id
-        else:
-        # message was sent in private chat, respond to the sender
-            chat_id = message.from_user.id
-            prompt= """
+        prompt= """
 gpt - CHATgpt answer, give a query after the command
 reply - use it as reply to a message, you can extend the query after the command
 dan - CHATgpt unleashed, give a query after the command
