@@ -236,4 +236,32 @@ def generate_dan(message):
         except Exception as e:
             print(e)
 
+
+@bot.message_handler(commands=['help'])
+def generate_help(message):
+    try:
+        if message.chat.type != "private":
+        # message was sent in a group, respond to the group
+            chat_id = message.chat.id
+        else:
+        # message was sent in private chat, respond to the sender
+            chat_id = message.from_user.id
+            prompt= """
+gpt - CHATgpt answer, give a query after the command
+reply - use it as reply to a message, you can extend the query after the command
+dan - CHATgpt unleashed, give a query after the command
+roasthim - same as reply but for roasting
+gpta - CHATgpt answer in mp3
+tl - use it as reply or provide text to translate in English.
+tts - use it as reply to convert text to speech
+"""
+        bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=prompt)
+        print(f'\n\n=======================================================================================\n{message.from_user.username} : {prompt}')
+    except Exception as e:
+        try:
+            bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=(e))
+            print(e)
+        except Exception as e:
+            print(e)
+
 bot.polling()
