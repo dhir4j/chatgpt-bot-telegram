@@ -236,6 +236,43 @@ def generate_dan(message):
         except Exception as e:
             print(e)
 
+            
+@bot.message_handler(commands=['bug'])
+def generate_bug(message):
+    if message.chat.type == "private":
+        chat_id = message.from_user.id
+    else:
+        chat_id = message.chat.id
+
+    prompt_array = message.text.split()[1:]
+
+    if len(prompt_array) < 1:
+        bot.send_message(chat_id=chat_id, reply_to_message_id=message.message_id, text="Please provide a message after the command '/bug'")
+        return
+
+    prompt = ' '.join(prompt_array)
+    bug = "There is a bug in the following function, please help me fix it : \n"
+    prompt = bug + prompt
+
+    try:
+        response = openai.Completion.create(
+            engine="text-davinci-003",
+            prompt=prompt,
+            max_tokens=2048
+        )
+    except Exception as e:
+        bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=f"An error occurred while calling OpenAI API: {e}")
+        return
+
+    response_text = response["choices"][0]["text"]
+
+    if len(response_text) > 3900:
+        bot.send_message(chat_id=chat_id, reply_to_message_id=message.message_id, text="The response message is too long for Telegram (maximum 3900 characters). Please try again with a shorter message.")
+        return
+
+    bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=response_text)
+    print(f'\n\n=======================================================================================\n{message.from_user.username} : {prompt} \n\nChatGPT : {response["choices"][0]["text"]}')
+
 
 @bot.message_handler(commands=['help'])
 def generate_help(message):
@@ -248,6 +285,7 @@ roasthim - same as reply but for roasting
 gpta - CHATgpt answer in mp3
 tl - use it as reply or provide text to translate in English.
 tts - use it as reply to convert text to speech
+bug - use it to find bugs in the code snippets 
 """
         bot.send_message(chat_id=message.chat.id, reply_to_message_id=message.message_id, text=prompt)
         print(f'\n\n=======================================================================================\n{message.from_user.username} : {prompt}')
