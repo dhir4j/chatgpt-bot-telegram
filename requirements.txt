@@ -1,5 +1,5 @@
 requests
-pyTelegramBotAPI==4.10.0
+pyTelegramBotAPI
 telebot
 openai
 gtts
