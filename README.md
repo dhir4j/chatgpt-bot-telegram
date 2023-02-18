@@ -28,6 +28,11 @@ $`python main.py`
 4. `/roasthim` - Use it to roast, to a reply message
 5. `/tl` - Translate to English
 
+## To-Do
+
+- [ ] Add /rdan (reply dan)
+- [ ] Add /rkaren (reply karen)
+- [ ] Optimize reply (check for telegram commands in prompt, if found remove it from array)
 
 ## Dev: [@dhir4j](https://t.me/dhir4j)
 Postivite for more contributions
