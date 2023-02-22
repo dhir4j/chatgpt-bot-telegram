@@ -22,18 +22,18 @@ $`pip install -r requirements.txt`
 $`python main.py`
 
 ## Usage
-1. gpt - chatGPT answer, give a query after the command
-2. reply - use it as reply to a message, you can extend the query after the command
-3. dan - chatGPT unleashed, give a query after the command
-4. karen - AI character: I'm Karen; demanding, arrogant, and unapologetically myself
-5. rdan - use dan to reply
-6. rkaren - use karen to reply
-7. bug - use it to find bugs in the code snippets
-8. roasthim - same as reply but for roasting
-9. gpta - chatGPT answer in mp3
-10. tl - use it as reply or provide text to translate it into English
-11. tts - use it as reply to convert text to speech
-12. help - to view this command manual
+`gpt` - chatGPT answer, give a query after the command  
+`reply` - use it as reply to a message, you can extend the query   after the command  
+`dan` - chatGPT unleashed, give a query after the command  
+`karen` - AI character: I'm Karen; demanding, arrogant, and unapologetically myself  
+`rdan` - use dan to reply  
+`rkaren` - use karen to reply  
+`bug` - use it to find bugs in the code snippets  
+`roasthim` - same as reply but for roasting  
+`gpta` - chatGPT answer in mp3  
+`tl` - use it as reply or provide text to translate it into English  
+`tts` - use it as reply to convert text to speech  
+
 ## To-Do
 
 - [x] Add /rdan (reply dan)
