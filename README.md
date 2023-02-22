@@ -22,20 +22,24 @@ $`pip install -r requirements.txt`
 $`python main.py`
 
 ## Usage
-1. `/reply` - generates a text response as a reply to a message in a group.
-2. `/gpt` - generates a text response to a message sent in a private chat.
-3. `/gpta` - same like gpt but returns audio
-4. `/roasthim` - Use it to roast, to a reply message
-5. `/tl` - Translate to English
+gpt - chatGPT answer, give a query after the command
+reply - use it as reply to a message, you can extend the query after the command
+dan - chatGPT unleashed, give a query after the command
+karen - AI character: I'm Karen; demanding, arrogant, and unapologetically myself
+rdan - use dan to reply
+rkaren - use karen to reply
+bug - use it to find bugs in the code snippets
+roasthim - same as reply but for roasting
+gpta - chatGPT answer in mp3
+tl - use it as reply or provide text to translate it into English
+tts - use it as reply to convert text to speech
 
 ## To-Do
 
-- [ ] Add /rdan (reply dan)
-- [ ] Add /rkaren (reply karen)
+- [x] Add /rdan (reply dan)
+- [x] Add /rkaren (reply karen)
 - [ ] Optimize reply (check for telegram commands in prompt, if found remove it from array)
 
-## Dev: [@dhir4j](https://t.me/dhir4j)
-Postivite for more contributions
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
