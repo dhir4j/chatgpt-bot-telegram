@@ -38,7 +38,8 @@ $`python main.py`
 
 - [x] Add /rdan (reply dan)
 - [x] Add /rkaren (reply karen)
-- [ ] Optimize reply (check for telegram commands in prompt, if found remove it from array)
+- [ ] Optimize reply (check for telegram commands in reply prompt, if found remove it using array slicing)
+- [ ] Fix Telegram text character limit
 
 ## License
 
